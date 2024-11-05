@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=YourArabicFont&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" rel="stylesheet">
+    <title>Sliding Sections with Counting</title>
+<style>
+    body {
+        font-family: "Alexandria Light", "Tahoma", "Times New Roman", sans-serif;
+        overflow-x: hidden;
+        margin: 0;
+        background-color: #000; /* Black background */
+        color: #d4af37; /* Gold color for text */
+    }
+    .header {
+        display: flex;
+        position: absolute;
+        top: 20px;
+        width: 100%;
+        z-index: 1;
+        color: #d4af37; /* Gold color for the header */
+        justify-content: space-between;
+        align-items: stretch;
+        padding: 0 20px;
+    }
+    .slider-container {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+    }
+    .section {
+        min-width: 99.78vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #1e1e1e; /* Dark background for sections */
+        border: 2px solid #d4af37; /* Gold border around each section */
+        text-align: center;
+        position: relative;
+    }
+    img {
+        max-width: 80%;
+        max-height: 50%;
+        margin: 20px 0;
+        border: 3px solid #d4af37; /* Gold border around images */
+        border-radius: 10px; /* Rounded corners for a softer look */
+    }
+    .btn{
+        margin-top: -10px;
+        margin-right: 20px;
+    }
+
+    button {
+        font-family: "Alexandria Light", "Tahoma", "Times New Roman", sans-serif;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+        background-color: #d4af37; /* Gold background for buttons */
+        color: #000; /* Black text color for buttons */
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    button:hover {
+        background-color: #b8860b; /* Darker gold on hover */
+    }
+    .nav-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .nav-buttons button {
+        margin: 0 10px;
+        padding: 8px 15px;
+        font-size: 18px;
+        background-color: #d4af37;
+        color: #000;
+        border: none;
+        border-radius: 5px;
+    }
+    .nav-buttons button:hover {
+        background-color: #b8860b;
+    }
+    .counter-display, .global-counter {
+        font-size: 24px;
+        color: #d4af37; /* Gold color for counter displays */
+    }
+    html, body {
+    overflow: hidden;
+}
+    @media (max-width: 480px) {
+        .section {
+            min-width: 99vw;
+        }
+    }
+</style>
+
+</head>
+<body>
+
+    <div class="header">
+        <div class="global-counter" id="global-counter">عدد تسبيحاتك اليوم: 0</div>
+        <button onclick="reset()" class="btn">محو التقدم لهذا اليوم</button>
+    </div>
+
+    <div class="slider-container" id="slider">
+        <div class="section" id="section-1">
+            <img src="1.png" alt="Image 1">
+            <div class="counter-display" id="counter-1">العداد : 0</div>
+            <button onclick="incrementCounter(1)">لا اله الا الله</button>
+            <div class="nav-buttons">
+                <button onclick="prevSection()"><i class='bx bx-arrow-from-right' ></i></button>
+                <button onclick="nextSection()"><i class='bx bx-arrow-from-left' ></i></button>
+            </div>
+
+        </div>
+        <div class="section" id="section-2">
+            <img src="2.png" alt="Image 2">
+            <div class="counter-display" id="counter-2">العداد : 0</div>
+            <button onclick="incrementCounter(2)">الله اكبر</button>
+            <div class="nav-buttons">
+                <button onclick="prevSection()"><i class='bx bx-arrow-from-right' ></i></button>
+                <button onclick="nextSection()"><i class='bx bx-arrow-from-left' ></i></button>
+            </div>
+
+        </div>
+        <div class="section" id="section-3">
+            <img src="3.png" alt="Image 3">
+            <div class="counter-display" id="counter-3">العداد : 0</div>
+            <button onclick="incrementCounter(3)">الحمد لله</button>
+            <div class="nav-buttons">
+                <button onclick="prevSection()"><i class='bx bx-arrow-from-right' ></i></button>
+                <button onclick="nextSection()"><i class='bx bx-arrow-from-left' ></i></button>
+            </div>
+
+        </div>
+        <div class="section" id="section-4">
+            <img src="4.png" alt="Image 4">
+            <div class="counter-display" id="counter-4">العداد : 0</div>
+            <button onclick="incrementCounter(4)">سبحان الله</button>
+            <div class="nav-buttons">
+                <button onclick="prevSection()"><i class='bx bx-arrow-from-right' ></i></button>
+                <button onclick="nextSection()"><i class='bx bx-arrow-from-left' ></i></button>
+            </div>
+
+        </div>
+        <div class="section" id="section-5">
+            <img src="5.png" alt="Image 5">
+            <div class="counter-display" id="counter-5">العداد : 0</div>
+            <button onclick="incrementCounter(5)">سبحان الله وبحمده سبحان الله العظيم</button>
+            <div class="nav-buttons">
+                <button onclick="prevSection()"><i class='bx bx-arrow-from-right' ></i></button>
+                <button onclick="nextSection()"><i class='bx bx-arrow-from-left' ></i></button>
+            </div>
+
+        </div>
+        <div class="section" id="section-6">
+            <img src="6.png" alt="Image 6">
+            <div class="counter-display" id="counter-6">العداد : 0</div>
+            <button onclick="incrementCounter(6)">لا حول ولا قوة الا بالله</button>
+            <div class="nav-buttons">
+                <button onclick="prevSection()"><i class='bx bx-arrow-from-right' ></i></button>
+                <button onclick="nextSection()"><i class='bx bx-arrow-from-left' ></i></button>
+            </div>
+
+        </div>
+        <div class="section" id="section-7">
+            <img src="7.png" alt="Image 7">
+            <div class="counter-display" id="counter-7">العداد : 0</div>
+            <button onclick="incrementCounter(7)">استغفر الله واتوب اليه</button>
+            <div class="nav-buttons">
+                <button onclick="prevSection()"><i class='bx bx-arrow-from-right' ></i></button>
+                <button onclick="nextSection()"><i class='bx bx-arrow-from-left' ></i></button>
+            </div>
+
+        </div>
+        <div class="section" id="section-8">
+            <img src="8.png" alt="Image 8">
+            <div class="counter-display" id="counter-8">العداد : 0</div>
+            <button onclick="incrementCounter(8)">حسبي الله ونعم الوكيل</button>
+            <div class="nav-buttons">
+                <button onclick="prevSection()"><i class='bx bx-arrow-from-right' ></i></button>
+                <button onclick="nextSection()"><i class='bx bx-arrow-from-left' ></i></button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+const totalSections = document.querySelectorAll('.section').length;
+const slider = document.getElementById('slider');
+
+// Ensure counters are initialized correctly
+let counters = JSON.parse(localStorage.getItem('counters')) || Array(totalSections).fill(0);
+
+function updateCounterDisplay() {
+    counters.forEach((count, index) => {
+        document.getElementById(`counter-${index + 1}`).textContent = `العداد : ${count}`;
+    });
+    updateGlobalCounter();
+}
+
+function updateGlobalCounter() {
+    const globalCount = counters.reduce((a, b) => a + b, 0);
+    document.getElementById('global-counter').textContent = `عدد تسبيحاتك لليوم : ${globalCount}`;
+}
+
+function incrementCounter(sectionIndex) {
+    counters[sectionIndex - 1]++;
+    localStorage.setItem('counters', JSON.stringify(counters));
+    updateCounterDisplay();
+}
+
+function reset() {
+    counters = Array(totalSections).fill(0);
+    localStorage.setItem('counters', JSON.stringify(counters));
+    updateCounterDisplay();
+}
+
+function showSection(index) {
+    slider.style.transform = `translateX(-${index * 100}vw)`;
+    currentIndex = index;
+}
+
+function nextSection() {
+    if (currentIndex < totalSections - 1) {
+        showSection(currentIndex + 1);
+    }
+}
+
+function prevSection() {
+    if (currentIndex > 0) {
+        showSection(currentIndex - 1);
+    }
+}
+
+// Initialize counter displays
+updateCounterDisplay();
+
+// Load saved section index
+window.addEventListener('load', () => {
+    const savedIndex = parseInt(localStorage.getItem('currentIndex')) || 0;
+    showSection(savedIndex);
+});
+
+// Save current section index before leaving the page
+window.addEventListener('beforeunload', () => {
+    localStorage.setItem('currentIndex', currentIndex);
+});
+
+    </script>
+
+</body>
+</html>
