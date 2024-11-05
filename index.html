@@ -203,7 +203,18 @@
     </div>
     <script type="module">
         import trackPageview from '@vercel/analytics';
-        trackPageview();
+    
+        function trackCurrentPage() {
+            trackPageview();
+        }
+    
+        trackCurrentPage();
+    
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function () {
+                setTimeout(trackCurrentPage, 100);
+            });
+        });
     </script>
 
     <script>
