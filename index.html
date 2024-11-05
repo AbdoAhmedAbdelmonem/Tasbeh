@@ -201,76 +201,74 @@
 
         </div>
     </div>
-<script type="module">
-   import { trackPageview } from '@vercel/analytics';
-   
-   trackPageview();
-</script>
+    <script type="module">
+        import trackPageview from '@vercel/analytics';
+        trackPageview();
+    </script>
 
     <script>
         let currentIndex = 0;
-const totalSections = document.querySelectorAll('.section').length;
-const slider = document.getElementById('slider');
-
-// Ensure counters are initialized correctly
-let counters = JSON.parse(localStorage.getItem('counters')) || Array(totalSections).fill(0);
-
-function updateCounterDisplay() {
-    counters.forEach((count, index) => {
-        document.getElementById(`counter-${index + 1}`).textContent = `العداد : ${count}`;
-    });
-    updateGlobalCounter();
-}
-
-function updateGlobalCounter() {
-    const globalCount = counters.reduce((a, b) => a + b, 0);
-    document.getElementById('global-counter').textContent = `عدد تسبيحاتك لليوم : ${globalCount}`;
-}
-
-function incrementCounter(sectionIndex) {
-    counters[sectionIndex - 1]++;
-    localStorage.setItem('counters', JSON.stringify(counters));
-    updateCounterDisplay();
-}
-
-function reset() {
-    counters = Array(totalSections).fill(0);
-    localStorage.setItem('counters', JSON.stringify(counters));
-    updateCounterDisplay();
-}
-
-function showSection(index) {
-    slider.style.transform = `translateX(-${index * 100}vw)`;
-    currentIndex = index;
-}
-
-function nextSection() {
-    if (currentIndex < totalSections - 1) {
-        showSection(currentIndex + 1);
-    }
-}
-
-function prevSection() {
-    if (currentIndex > 0) {
-        showSection(currentIndex - 1);
-    }
-}
-
-// Initialize counter displays
-updateCounterDisplay();
-
-// Load saved section index
-window.addEventListener('load', () => {
-    const savedIndex = parseInt(localStorage.getItem('currentIndex')) || 0;
-    showSection(savedIndex);
-});
-
-// Save current section index before leaving the page
-window.addEventListener('beforeunload', () => {
-    localStorage.setItem('currentIndex', currentIndex);
-});
+        const totalSections = document.querySelectorAll('.section').length;
+        const slider = document.getElementById('slider');
+        
+        // Ensure counters are initialized correctly
+        let counters = JSON.parse(localStorage.getItem('counters')) || Array(totalSections).fill(0);
+        
+        function updateCounterDisplay() {
+            counters.forEach((count, index) => {
+                document.getElementById(`counter-${index + 1}`).textContent = `العداد : ${count}`;
+            });
+            updateGlobalCounter();
+        }
+        
+        function updateGlobalCounter() {
+            const globalCount = counters.reduce((a, b) => a + b, 0);
+            document.getElementById('global-counter').textContent = `عدد تسبيحاتك لليوم : ${globalCount}`;
+        }
+        
+        function incrementCounter(sectionIndex) {
+            counters[sectionIndex - 1]++;
+            localStorage.setItem('counters', JSON.stringify(counters));
+            updateCounterDisplay();
+        }
+        
+        function reset() {
+            counters = Array(totalSections).fill(0);
+            localStorage.setItem('counters', JSON.stringify(counters));
+            updateCounterDisplay();
+        }
+        
+        function showSection(index) {
+            slider.style.transform = `translateX(-${index * 100}vw)`;
+            currentIndex = index;
+        }
+        
+        function nextSection() {
+            if (currentIndex < totalSections - 1) {
+                showSection(currentIndex + 1);
+            }
+        }
+        
+        function prevSection() {
+            if (currentIndex > 0) {
+                showSection(currentIndex - 1);
+            }
+        }
+        
+        // Initialize counter displays
+        updateCounterDisplay();
+        
+        // Load saved section index
+        window.addEventListener('load', () => {
+            const savedIndex = parseInt(localStorage.getItem('currentIndex')) || 0;
+            showSection(savedIndex);
+        });
+        
+        // Save current section index before leaving the page
+        window.addEventListener('beforeunload', () => {
+            localStorage.setItem('currentIndex', currentIndex);
+        });
 
     </script>
-
 </body>
 </html>
